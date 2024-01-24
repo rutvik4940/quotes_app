@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:quotes_app/model/model_screen.dart';
 
 import '../../utils/global.dart';
 
@@ -14,6 +15,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  bool isgrad=false;
   @override
    void initState() {
    super.initState();
@@ -25,21 +27,60 @@ class _HomeScreenState extends State<HomeScreen> {
       onPopInvoked: (didPop) {
         convert();
       },
-      child: Scaffold(
-          body: Center(
-            child:ListView.builder(itemCount: quotesList.length,itemBuilder:(context, index) => Container(
-              height: 120,
-              padding: const EdgeInsets.all(20),
-              margin: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                  borderRadius: BorderRadius.circular(10),
-              ),
-              child: Text("${qutestomodel[index].quotes}",style: TextStyle(fontSize: 18)),
-            ),)
+      child: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text("Quotes"),
+            actions: [
+             IconButton(onPressed: () {
+              setState(() {
+                isgrad=!isgrad;
+              });
+             },
+          icon: Icon(isgrad?Icons.ac_unit:Icons.today_sharp),
+             ),
+            ],
           ),
-        ),
-    );
+            body: Center(
+
+              child:isgrad?GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),itemCount:quotesList.length,itemBuilder: (context, index) =>  InkWell(
+                onTap: () {
+                  qutestomodel=quotesList[index] as List<QuotesModel>;
+                  Navigator.pushNamed(context, 'quotes',arguments: QuotesModel);
+                },
+                child: Container(
+                  height: 120,
+                  padding: const EdgeInsets.all(20),
+                  margin: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Text("${qutestomodel[index].quotes}",style: TextStyle(fontSize: 18)),
+                ),
+              ),
+              )
+              :ListView.builder(itemCount: quotesList.length,itemBuilder:(context, index) => InkWell(
+                onTap: () {
+                  qutestomodel=quotesList[index] as List<QuotesModel>;
+                  Navigator.pushNamed(context, 'quotes',arguments: QuotesModel);
+                },
+                child: Container(
+                  height: 120,
+                  padding: const EdgeInsets.all(20),
+                  margin: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Text("${qutestomodel[index].quotes}",style: TextStyle(fontSize: 18)),
+                ),
+              ),
+              ),
+              )
+            ),
+      ),
+        );
 
   }
     void convert()
@@ -76,6 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
             const Text("Today's quotes",style: TextStyle(fontSize: 20)),
             const SizedBox(height: 5,),
            Text( "${qutestomodel[i].quotes}"),
+
           ],
         ),
       )
