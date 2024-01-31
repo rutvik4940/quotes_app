@@ -9,4 +9,5 @@ class QuotesModel
    {
      return QuotesModel(author: m1['author'],category: m1['category'],quotes: m1['quotes']);
    }
+
 }

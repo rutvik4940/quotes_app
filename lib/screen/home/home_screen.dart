@@ -42,11 +42,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
             body: Center(
-
               child:isgrad?GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),itemCount:quotesList.length,itemBuilder: (context, index) =>  InkWell(
                 onTap: () {
-                  qutestomodel=quotesList[index] as List<QuotesModel>;
-                  Navigator.pushNamed(context, 'quotes',arguments: QuotesModel);
+                  Navigator.pushNamed(context, 'quotes',arguments:quotesModelList [index]);
                 },
                 child: Container(
                   height: 120,
@@ -56,14 +54,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Colors.blue,
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: Text("${qutestomodel[index].quotes}",style: TextStyle(fontSize: 18)),
+                  child: Text("$quotesModelList{[index].quotes}",style: TextStyle(fontSize: 18)),
                 ),
               ),
               )
               :ListView.builder(itemCount: quotesList.length,itemBuilder:(context, index) => InkWell(
                 onTap: () {
-                  qutestomodel=quotesList[index] as List<QuotesModel>;
-                  Navigator.pushNamed(context, 'quotes',arguments: QuotesModel);
+
+                  Navigator.pushNamed(context, 'quotes',arguments: quotesModelList [index]);
                 },
                 child: Container(
                   height: 120,
@@ -73,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Colors.blue,
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: Text("${qutestomodel[index].quotes}",style: TextStyle(fontSize: 18)),
+                  child: Text("${quotesModelList[index].quotes}",style: TextStyle(fontSize: 18)),
                 ),
               ),
               ),
@@ -81,7 +79,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
       ),
         );
-
   }
     void convert()
    {
@@ -116,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
          children: [
             const Text("Today's quotes",style: TextStyle(fontSize: 20)),
             const SizedBox(height: 5,),
-           Text( "${qutestomodel[i].quotes}"),
+           Text( "${quotesModelList[i].quotes}"),
 
           ],
         ),

@@ -10,11 +10,10 @@ List<Map>quotesList=[
   {"author":"Albert Einstein","quotes":"“Try not to become a man of success. Rather become a man of value.”","category":"success"},
 
 ];
-List<QuotesModel> qutestomodel=[];
+List<QuotesModel> quotesModelList=[];
 void convert()
 {
-  qutestomodel=quotesList.map((e) => QuotesModel.setdata(e)).toList();
-  print(qutestomodel[0].quotes);
-  print(qutestomodel[1].quotes);
-  print(qutestomodel[2].quotes);
+  quotesModelList=quotesList.map((e) => QuotesModel.setdata(e)).toList();
+  print(quotesModelList[0].quotes);
+
 }
