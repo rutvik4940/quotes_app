@@ -40,12 +40,10 @@ class _QutoesScreenState extends State<QutoesScreen> {
             ),
             IconButton(
               onPressed: () async {
-
                 RenderRepaintBoundary render = repaintKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
                 ui.Image image = await render.toImage(pixelRatio: 3);
                 ByteData? byteData =await image.toByteData(format: ui.ImageByteFormat.png);
-                Directory data = await getApplicationDocumentsDirectory();
-                String path="${data.path}/${"rutvik"}.png";
+                String path="/storage/emulated/0/Download/rutvik.png";
                 await File(path).writeAsBytes(byteData!.buffer.asUint8List());
                 print("$path");
               },
